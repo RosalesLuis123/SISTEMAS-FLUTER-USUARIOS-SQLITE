@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        td a {
+            display: inline-block;
+            margin: 2px;
+            padding: 8px 15px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .edit {
+            background-color: #2196F3;
+        }
+
+        .delete {
+            background-color: #f44336;
+        }
+
+        a.add-user {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lista de Usuarios</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Cuenta</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+
+        <% if (lista && Array.isArray(lista) && lista.length > 0) { %>
+            <% lista.forEach(user => { %>
+                <tr>
+                    <td><%= user.nombre %></td>
+                    <td><%= user.cuenta %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.rol %></td>
+                    <td>
+                        <a href="/usuarios/edit/<%= user.id %>" class="edit">Editar</a>
+                        <a href="/usuarios/delete/<%= user.id %>" class="delete">Eliminar</a>
+                    </td>
+                </tr>
+            <% }); %>
+        <% } else { %>
+            <tr>
+                <td colspan="6">No hay usuarios disponibles</td>
+            </tr>
+        <% } %>
+
+    </table>
+    <a href="/usuarios/create" class="add-user">Añadir Usuario</a>
+</body>
+
+</html>
